@@ -9,7 +9,7 @@ namespace GradeBook.GradeBooks
 
         int numOfStudents;
 
-        public int NumOfStudents { get => numOfStudents; set => numOfStudents = value; }
+        public int NumOfStudents { get => Students.Count;}
 
         public RankedGradeBook(string name) : base(name)
         {
