@@ -7,13 +7,17 @@ namespace GradeBook.GradeBooks
     public class RankedGradeBook : BaseGradeBook
     {
 
+        int numOfStudents;
+
+        public int NumOfStudents { get => numOfStudents; set => numOfStudents = value; }
+
         public RankedGradeBook(string name) : base(name)
         {
             Type = GradeBookType.Ranked;
         }
         public override char GetLetterGrade(double averageGrade)
         {
-            if (Students.Count < 5)
+            if (numOfStudents < 5)
                 throw new InvalidOperationException();
             var classAverage = (int)Math.Ceiling(Students.Count * .2);
             var grade = Students.OrderByDescending(e => e.AverageGrade).Select(e => e.AverageGrade).ToList();
@@ -28,6 +32,14 @@ namespace GradeBook.GradeBooks
                 return 'D';
             else
                 return 'F';
+        }
+
+        public override void CalculateStatistics()
+        {
+            if(numOfStudents < 5)
+                Console.Write("Ranked grading requires at least 5 students with grades in order to properly calculate a student's overall grade");
+            else
+                base.CalculateStatistics();
         }
     }
 }
