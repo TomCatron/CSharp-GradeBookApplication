@@ -5,10 +5,7 @@ using System.Linq;
 namespace GradeBook.GradeBooks
 {
     public class RankedGradeBook : BaseGradeBook
-    {
-
-        int numOfStudents;
-
+    { 
         public int NumOfStudents { get => Students.Count;}
 
         public RankedGradeBook(string name) : base(name)
@@ -17,7 +14,7 @@ namespace GradeBook.GradeBooks
         }
         public override char GetLetterGrade(double averageGrade)
         {
-            if (numOfStudents < 5)
+            if (NumOfStudents < 5)
                 throw new InvalidOperationException();
             var classAverage = (int)Math.Ceiling(Students.Count * .2);
             var grade = Students.OrderByDescending(e => e.AverageGrade).Select(e => e.AverageGrade).ToList();
@@ -36,7 +33,7 @@ namespace GradeBook.GradeBooks
 
         public override void CalculateStatistics()
         {
-            if(numOfStudents < 5)
+            if(NumOfStudents < 5)
                 Console.Write("Ranked grading requires at least 5 students with grades in order to properly calculate a student's overall grade");
             else
                 base.CalculateStatistics();
